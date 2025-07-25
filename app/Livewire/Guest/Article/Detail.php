@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Guest;
+namespace App\Livewire\Guest\Article;
 
 use App\Models\Post;
 use App\Models\Stat;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class ArticleDetail extends Component
+class Detail extends Component
 {
     public Post $post;
     public bool $liked = false;
@@ -15,9 +15,9 @@ class ArticleDetail extends Component
     public int $totalLikes = 0;
     public int $totalComments = 0;
 
-    public function mount($id)
+    public function mount(Post $post)
     {
-        $this->post = Post::find($id);
+        $this->post = $post;
         $this->updateLikeState();
         $this->updateSaveState();
     }
@@ -69,6 +69,6 @@ class ArticleDetail extends Component
 
     public function render()
     {
-        return view('livewire.guest.article-detail');
+        return view('livewire.guest.article.detail');
     }
 }

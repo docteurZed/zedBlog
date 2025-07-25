@@ -30,7 +30,6 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class PostResource extends Resource
 {
@@ -55,11 +54,7 @@ class PostResource extends Resource
                         TextInput::make('title')
                             ->label('Titre')
                             ->maxLength(255)
-                            ->required()
-                            ->reactive()
-                            ->afterStateUpdated(function (Set $set, $state) {
-                                $set('slug', Str::slug($state));
-                            }),
+                            ->required(),
                 ]),
 
                 Select::make('category_id')
@@ -72,7 +67,6 @@ class PostResource extends Resource
                     ->label('Tag')
                     ->multiple()
                     ->options(Tag::all()->pluck('name', 'id'))
-                    ->relationship('tags', 'name')
                     ->searchable(),
 
                 Select::make('type')
@@ -86,12 +80,6 @@ class PostResource extends Resource
                     ->required()
                     ->native(false),
 
-                TextInput::make('slug')
-                    ->maxLength(255)
-                    ->required()
-                    ->disabled()
-                    ->dehydrated(),
-
                 Grid::make(1)
                     ->schema([
                         Textarea::make('resume')
@@ -100,7 +88,6 @@ class PostResource extends Resource
 
                         RichEditor::make('content')
                             ->label('Contenu')
-                            ->visible(fn (Get $get) => $get('type') === 'article')
                             ->requiredIf('type', 'article'),
 
                         TextInput::make('media_url')

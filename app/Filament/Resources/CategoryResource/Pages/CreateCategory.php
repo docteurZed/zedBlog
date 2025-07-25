@@ -7,6 +7,7 @@ use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CreateCategory extends CreateRecord
 {
@@ -15,6 +16,7 @@ class CreateCategory extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['user_id'] = Auth::user()->id;
+        $data['slug'] = Str::slug($data['name']);
         return $data;
     }
 

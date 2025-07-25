@@ -44,22 +44,12 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                Grid::make(2)
+                Grid::make(1)
                     ->schema([
                         TextInput::make('name')
                             ->label('Nom')
                             ->maxLength(255)
-                            ->required()
-                            ->reactive()
-                            ->afterStateUpdated(function (Set $set, $state) {
-                                $set('slug', Str::slug($state));
-                            }),
-
-                        TextInput::make('slug')
-                            ->maxLength(255)
-                            ->required()
-                            ->disabled()
-                            ->dehydrated(),
+                            ->required(),
                     ]),
 
                 Grid::make(1)

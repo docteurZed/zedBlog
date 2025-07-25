@@ -41,17 +41,7 @@ class TagResource extends Resource
                 TextInput::make('name')
                     ->label('Nom')
                     ->maxLength(255)
-                    ->required()
-                    ->reactive()
-                    ->afterStateUpdated(function (Set $set, $state) {
-                        $set('slug', Str::slug($state));
-                    }),
-
-                TextInput::make('slug')
-                    ->maxLength(255)
-                    ->required()
-                    ->disabled()
-                    ->dehydrated(),
+                    ->required(),
             ]);
     }
 

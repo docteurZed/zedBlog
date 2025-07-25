@@ -24,4 +24,14 @@ class Category extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function subscribers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'category_user',
+            'category_id',
+            'user_id'
+        );
+    }
 }

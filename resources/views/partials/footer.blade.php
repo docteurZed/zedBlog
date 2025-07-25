@@ -1,4 +1,4 @@
-<div class="bg-gray-50 dark:bg-gray-950/25 px-8 md:px-16">
+{{-- <div class="bg-gray-50 dark:bg-gray-950/25 px-8 md:px-16">
     <div class="py-8 mx-auto max-w-screen-xl lg:py-16">
         <div class="text-center">
             <h2 class="mb-3 text-3xl text-gray-900 dark:text-white font-bold">Abbonez-vous à la newsletter</h2>
@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <footer class="bg-white dark:bg-gray-900 mt-8 md:px-8">
     <div class="mx-auto w-full p-4 py-6 lg:py-8">

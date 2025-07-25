@@ -12,14 +12,14 @@
                         </svg>
                     </div>
                     <div class="col-span-3 m-3">
-                        <h2 class="mb-3 text-4xl text-gray-900 dark:text-white font-bold">Tag</h2>
+                        <h2 class="mb-3 text-4xl text-gray-900 dark:text-white font-bold">Tags</h2>
                         <p class="mb-4 font-normal text-gray-600 dark:text-gray-400 w-full md:w-[80%]">Toutes les tags enrégistrés sont disponibles ici.</p>
                         <div class="flex gap-2 text-gray-700 dark:text-gray-200 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 16 16">
                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0"/>
                             </svg>
-                            <span class="font-semibold text-sm">25 tags</span>
+                            <span class="font-semibold text-sm">{{ $tags->count() }} tag{{ $tags->count() > 1 ? 's' : '' }}</span>
                         </div>
                     </div>
                 </div>
@@ -28,36 +28,13 @@
     </div>
     <div class="p-8 md:p-16">
         <div class="flex flex-wrap gap-3">
-            <a href="#" class="border border-gray-400 dark:border-gray-600 rounded-full px-4 py-3 text-gray-900 dark:text-white text-sm font-semibold cursor-pointer hover:bg-gray-100/25 dark:hover:bg-gray-800/25 transition ease-in-out duration-150">Aricles</a>
-        </div>
-        <div class="my-12 flex justify-between items-center font-semibold text-gray-900 dark:text-white">
-            <div class="">
-                <button type="button" class="rounded-2xl px-4 py-3 text-gray-900 dark:text-white flex gap-2 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition ease-in-out duration-150">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/>
-                    </svg>
-                    <span class="font-semibold">Précédent</span>
-                </button>
+            @forelse ($tags as $tag)
+            <a href="{{ route('tag.detail', ['id' => $tag->id, 'slug' => $tag->slug]) }}" class="border border-gray-400 dark:border-gray-600 rounded-full px-4 py-3 text-gray-900 dark:text-white text-sm font-semibold cursor-pointer hover:bg-gray-100/25 dark:hover:bg-gray-800/25 transition ease-in-out duration-150">{{ $tag->name }}</a>
+            @empty
+            <div class="sm:col-span-2 md:col-span-3 lg:col-span-4 flex justify-center border border-gray-200 dark:border-gray-700 rounded-3xl group p-5">
+                <p class="text-gray-600 dark:text-gray-400 font-semibold">Aucun tag disponible</p>
             </div>
-            <div class="hidden md:block flex gap-2 items-center">
-                <button type="button" class="rounded-2xl px-4 py-3 text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition ease-in-out duration-150">
-                    <span class="font-semibold">1</span>
-                </button>
-                <button type="button" class="rounded-2xl px-4 py-3 text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition ease-in-out duration-150">
-                    <span class="font-semibold">2</span>
-                </button>
-                <button type="button" class="rounded-2xl px-4 py-3 text-gray-900 dark:text-white cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition ease-in-out duration-150">
-                    <span class="font-semibold">3</span>
-                </button>
-            </div>
-            <div class="">
-                <button type="button" class="rounded-2xl px-4 py-3 text-gray-900 dark:text-white flex gap-2 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition ease-in-out duration-150">
-                    <span class="font-semibold">Suivant</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
-                    </svg>
-                </button>
-            </div>
+            @endforelse
         </div>
     </div>
 </div>

@@ -86,4 +86,90 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'likes');
+    }
+
+    public function savedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'saves');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function followedAuthors()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'author_subscriptions',     // nom de la table pivot
+            'user_id',         // clé locale : l'utilisateur actuel est le lecteur
+            'author_id'        // clé associée : il suit un auteur
+        );
+    }
+
+    // Les lecteurs qui suivent cet auteur
+    public function authorFollowers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'author_subscriptions',     // table pivot
+            'author_id',       // clé locale : l'utilisateur actuel est l'auteur
+            'user_id'          // clé associée : il est suivi par un lecteur
+        );
+    }
+
+    public function isFollowingAuthor(User $author)
+    {
+        return $this->followedAuthors->contains($author->id);
+    }
+
+    public function isAuthorFollowedBy(User $user)
+    {
+        return $this->authorFollowers->contains($user->id);
+    }
+
+    public function followAuthor(User $author)
+    {
+        $this->followedAuthors()->syncWithoutDetaching($author->id);
+    }
+
+    public function unfollowAuthor(User $author)
+    {
+        $this->followedAuthors()->detach($author->id);
+    }
+
+    public function subscribedCategories()
+    {
+        return $this->belongsToMany(
+            Category::class,
+            'category_subscriptions',
+            'user_id',
+            'category_id'
+        );
+    }
+
+    public function isSubscribedToCategory(Category $category): bool
+    {
+        return $this->subscribedCategories->contains($category->id);
+    }
+
+    public function subscribeToCategory(Category $category): void
+    {
+        $this->subscribedCategories()->syncWithoutDetaching($category->id);
+    }
+
+    public function unsubscribeFromCategory(Category $category): void
+    {
+        $this->subscribedCategories()->detach($category->id);
+    }
+
+    public function media()
+    {
+        return $this->hasOne(Media::class);
+    }
 }

@@ -16,27 +16,20 @@
 
                 @auth
                 <div class="flex gap-3">
-                    <button class="relative cursor-pointer" type="button" id="notificationButton" data-dropdown-toggle="notificationDropdown" data-dropdown-placement="bottom-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-8 w-8 text-gray-400" viewBox="0 0 16 16">
-                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
-                        </svg>
-                        <span class="absolute -top-0.5 -right-0.5 w-6 h-6 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full text-xs flex items-center justify-center text-white">12</span>
-                    </button>
-
                     <button type="button" id="avatarButton" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="relative inline-flex items-center justify-center w-10 h-10 p-1 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-700 cursor-pointer hover:ring-2 ring-gray-300 dark:ring-gray-500">
                         <span class="font-semibold text-gray-600 dark:text-gray-300">{{ Auth::user()->initials }}</span>
                     </button>
                 </div>
 
                 <!-- Dropdown menu -->
-                <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-3xl shadow-sm w-64 dark:bg-gray-700 dark:divide-gray-600 p-5">
+                <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-3xl shadow-sm w-64 dark:bg-gray-800 dark:divide-gray-600 p-5">
                     <div class="pb-3 text-sm text-gray-900 dark:text-white flex gap-3 items-center">
                         <div href="#" class="w-12 h-12">
                             <div class="bg-yellow-400 h-12 w-12 rounded-full"></div>
                         </div>
                         <div class="flex flex-col justify-center">
-                            <span class="font-bold">Albert Camp</span>
-                            <span class="font-semibold text-gray-500 dark:text-gray-400 text-sm">hello@mail.com</span>
+                            <span class="font-bold">{{ Auth::user()->name }}</span>
+                            <span class="font-semibold text-gray-500 dark:text-gray-400 text-sm">{{ Auth::user()->email }}</span>
                         </div>
                     </div>
                     <ul class="py-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
@@ -46,14 +39,6 @@
                                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                                 </svg>
                                 <span class="font-semibold">Mon compte</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('saved') }}" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-2xl flex items-center gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 16 16">
-                                    <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
-                                </svg>
-                                <span class="font-semibold">Post enrégistré</span>
                             </a>
                         </li>
                     </ul>
@@ -68,49 +53,6 @@
                                 <span class="font-semibold">Déconnexion</span>
                             </button>
                         </form>
-                    </div>
-                </div>
-
-                <div id="notificationDropdown" class="z-10 hidden bg-white rounded-3xl shadow-sm w-96 dark:bg-gray-700 p-5">
-                    <h3 class="py-3 text-xl text-gray-900 dark:text-white font-bold">Notifications</h3>
-                    <ul class="py-3">
-                        <li>
-                            <a href="#" class="flex gap-4 p-3 rounded-2xl hover:bg-gray-800/25">
-                                <div href="#" class="w-12 h-12">
-                                    <div class="bg-yellow-400 h-12 w-12 rounded-full"></div>
-                                </div>
-                                <div class="flex justify-between items-center w-full">
-                                    <div class="flex flex-col justify-center gap-1">
-                                        <span class="font-bold text-gray-900 dark:text-white">Albert Camp</span>
-                                        <span class="font-semibold text-gray-500 dark:text-gray-400 text-sm">Lorem ipsum dolor, sit.</span>
-                                        <span class="text-gray-500 dark:text-gray-400 text-sm">il y a une minute</span>
-                                    </div>
-                                    <div class="w-2 h-2">
-                                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex gap-4 p-3 rounded-2xl hover:bg-gray-800/25">
-                                <div href="#" class="w-12 h-12">
-                                    <div class="bg-yellow-400 h-12 w-12 rounded-full"></div>
-                                </div>
-                                <div class="flex justify-between items-center w-full">
-                                    <div class="flex flex-col justify-center gap-1">
-                                        <span class="font-bold text-gray-900 dark:text-white">Albert Camp</span>
-                                        <span class="font-semibold text-gray-500 dark:text-gray-400 text-sm">Lorem ipsum dolor, sit.</span>
-                                        <span class="text-gray-500 dark:text-gray-400 text-sm">il y a une minute</span>
-                                    </div>
-                                    <div class="w-2 h-2">
-                                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="py-3">
-                        <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 font-semibold rounded-full text-sm w-full px-5 py-3 text-center bg-blue-500 block">Toutes les notifications</a>
                     </div>
                 </div>
                 @endauth
